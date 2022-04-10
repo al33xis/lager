@@ -1,49 +1,38 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import config from "../config/config.json";
+import { Text, View } from "react-native";
+import productModel from "../models/products";
+import { Base, Typography } from "../styles/index";
 
-function StockList() {
-    const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        fetch(`${config.base_url}/products?api_key=${config.api_key}`)
-            .then(response => response.json())
-            .then(result => setProducts(result.data));
+// function StockList() {
+function StockList({products, setProducts}) {
+
+    useEffect(async () => {
+        setProducts(await productModel.getProducts());
     }, []);
 
-    const list = products.map((product, index) => <Text key={index} style={styles.list_item}> • { product.name } - { product.stock } st</Text>);
+
+    const list = products.map((product, index) => {
+        return <Text
+                key={index}
+                style={Typography.list_item}>
+                • { product.name } - { product.stock } st
+                </Text>
+    });
 
     return (
         <View>
+            <Text style={Typography.header1}>Lagerförteckning</Text>
+            <Text style={Typography.list_head}>Namn - Saldo</Text>
             {list}
         </View>
     )
 }
 
-export default function Stock() {
+export default function Stock({products, setProducts}) {
     return (
         <View>
-            <Text style={styles.header}>Lagerförteckning</Text>
-            <Text style={styles.list_head}>Namn - Saldo</Text>
-            <StockList />
+            <StockList products={products} setProducts={setProducts} />
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    header: {
-        fontSize: 24,
-        color: '#333'
-    },
-    list_head: {
-        fontSize: 18,
-        color: '#333',
-        textAlign: 'center',
-        paddingBottom: 12
-    },
-    list_item: {
-        fontSize: 16,
-        color: '#333',
-        paddingBottom: 4,
-    }
-});

@@ -1,41 +1,48 @@
+import { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Image, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import warehouse from './assets/warehouse.jpg';
-import Stock from './components/Stock.tsx';
-import ButtonTest from './components/Button.tsx';
+import { Ionicons } from '@expo/vector-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Home from "./components/Home";
+import Pick from "./components/Pick";
+import productModel from "./models/products";
+import { Base, Typography } from "./styles/index";
+
+const Tab = createBottomTabNavigator();
+const routeIcons = {
+    "Lager": "home",
+    "Plock": "list",
+};
+
 
 
 export default function App() {
+    const [products, setProducts] = useState([]);
+
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.base}>
-                <Text style={styles.header}>Infinity Warehouses</Text>
-                <Image source={warehouse} style={{width: 200, height: 200, marginBottom: 18}}/>
-                <Stock />
-                <ButtonTest />
-                <StatusBar style="auto" />
-            </View>
+        <SafeAreaView style={Base.container_safeArea}>
+            <NavigationContainer>
+                <Tab.Navigator screenOptions={ ({route}) => ({
+                    tabBarIcon: ({ focused, color, size }) => {
+                        let iconName = routeIcons[route.name] || "alert";
+
+                        return <Ionicons name={iconName} size={size} color={color} />;
+                    },
+                    tabBarActiveTintColor: 'tomato',
+                    tabBarInactiveTintColor: 'gray',
+                })}>
+                    {/* <Tab.Screen name="Lager" component={Home} /> */}
+                    <Tab.Screen name="Lager">
+                        {() => <Home products={products} setProducts={setProducts} />}
+                    </Tab.Screen>
+                    {/* <Tab.Screen name="Plock" component={Pick} /> */}
+                    <Tab.Screen name="Plock">
+                        {() => <Pick products={products} setProducts={setProducts} />}
+                    </Tab.Screen>
+                </Tab.Navigator>
+            </NavigationContainer>
+            <StatusBar style='auto' />
         </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    header: {
-        color: '#000',
-        fontSize: 38,
-        paddingBottom: 18
-    },
-    base: {
-        // flex: 1,
-        backgroundColor: '#fff',
-        paddingLeft: 12,
-        paddingRight: 12,
-        alignItems: 'center'
-    }
-});
