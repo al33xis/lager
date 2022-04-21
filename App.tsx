@@ -4,8 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from "./components/Home";
-import Pick from "./components/Pick";
+import Home from "./components/Lager/Home";
+import Pick from "./components/Plock/Pick";
+import Deliveries from "./components/Inleverans/Deliveries";
+
 import productModel from "./models/products";
 import { Base, Typography } from "./styles/index";
 
@@ -13,6 +15,7 @@ const Tab = createBottomTabNavigator();
 const routeIcons = {
     "Lager": "home",
     "Plock": "list",
+    "Inleverans": "airplane",
 };
 
 
@@ -32,13 +35,14 @@ export default function App() {
                     tabBarActiveTintColor: 'tomato',
                     tabBarInactiveTintColor: 'gray',
                 })}>
-                    {/* <Tab.Screen name="Lager" component={Home} /> */}
                     <Tab.Screen name="Lager">
                         {() => <Home products={products} setProducts={setProducts} />}
                     </Tab.Screen>
-                    {/* <Tab.Screen name="Plock" component={Pick} /> */}
                     <Tab.Screen name="Plock">
                         {() => <Pick products={products} setProducts={setProducts} />}
+                    </Tab.Screen>
+                    <Tab.Screen name="Inleverans">
+                        {() => <Deliveries/>}
                     </Tab.Screen>
                 </Tab.Navigator>
             </NavigationContainer>
