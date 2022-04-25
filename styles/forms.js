@@ -7,6 +7,10 @@ export const input = {
     borderRadius: 3,
 }
 
+export const button = {
+    marginBottom: 28,
+}
+
 // export const input = {
 //     font-size: $body-font-size;
 //     line-height: $line-height;

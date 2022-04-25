@@ -43,7 +43,7 @@ function DateDropDown(props) {
     };
 
     return (
-        <View>
+        <View style={Forms.button}>
             {Platform.OS === "android" && (
                 <Button onPress={showDatePicker} title="Visa datumväljare" />
             )}
