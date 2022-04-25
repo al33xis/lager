@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { ScrollView } from 'react-native';
 import Home from "./components/Lager/Home";
 import Pick from "./components/Plock/Pick";
 import Deliveries from "./components/Inleverans/Deliveries";
@@ -26,25 +27,25 @@ export default function App() {
     return (
         <SafeAreaView style={Base.container_safeArea}>
             <NavigationContainer>
-                <Tab.Navigator screenOptions={ ({route}) => ({
-                    tabBarIcon: ({ focused, color, size }) => {
-                        let iconName = routeIcons[route.name] || "alert";
+                    <Tab.Navigator screenOptions={ ({route}) => ({
+                        tabBarIcon: ({ focused, color, size }) => {
+                            let iconName = routeIcons[route.name] || "alert";
 
-                        return <Ionicons name={iconName} size={size} color={color} />;
-                    },
-                    tabBarActiveTintColor: 'tomato',
-                    tabBarInactiveTintColor: 'gray',
-                })}>
-                    <Tab.Screen name="Lager">
-                        {() => <Home products={products} setProducts={setProducts} />}
-                    </Tab.Screen>
-                    <Tab.Screen name="Plock">
-                        {() => <Pick products={products} setProducts={setProducts} />}
-                    </Tab.Screen>
-                    <Tab.Screen name="Inleverans">
-                        {() => <Deliveries/>}
-                    </Tab.Screen>
-                </Tab.Navigator>
+                            return <Ionicons name={iconName} size={size} color={color} />;
+                        },
+                        tabBarActiveTintColor: 'tomato',
+                        tabBarInactiveTintColor: 'gray',
+                    })}>
+                        <Tab.Screen name="Lager">
+                            {() => <Home products={products} setProducts={setProducts} />}
+                        </Tab.Screen>
+                        <Tab.Screen name="Plock">
+                            {() => <Pick products={products} setProducts={setProducts} />}
+                        </Tab.Screen>
+                        <Tab.Screen name="Inleverans">
+                            {() => <Deliveries products={products} setProducts={setProducts}/>}
+                        </Tab.Screen>
+                    </Tab.Navigator>
             </NavigationContainer>
             <StatusBar style='auto' />
         </SafeAreaView>

@@ -8,10 +8,12 @@ import Stock from './Stock';
 export default function Home({products, setProducts}) {
 
     return (
+        <ScrollView>
             <View style={Base.container_home}>
                 <Text style={Typography.header1}>Infinity Warehouses</Text>
                 <Image source={warehouse} style={{width: 200, height: 200, marginBottom: 18}}/>
                 <Stock products={products} setProducts={setProducts} />
             </View>
+        </ScrollView>
   );
 }

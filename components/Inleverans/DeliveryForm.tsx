@@ -67,7 +67,7 @@ function DateDropDown(props) {
 }
 
 
-export default function DeliveryForm({ navigation }) {
+export default function DeliveryForm({ route, navigation, setProductsHome }) {
     const [delivery, setDelivery] = useState<Partial<Delivery>>({});
     const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
 
@@ -80,6 +80,8 @@ export default function DeliveryForm({ navigation }) {
         };
 
         await productModel.addStock(updatedProduct);
+
+        setProductsHome(await productModel.getProducts());
 
         navigation.navigate("List", {reload: true});
     }
