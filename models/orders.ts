@@ -29,8 +29,6 @@ const orders = {
         });
 
         products.updateStock(order.order_items);
-
-        // gör en ny fetch med order.order_items och skicka till updateStock
     }
 };
 

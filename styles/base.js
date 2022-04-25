@@ -12,3 +12,12 @@ export const container_home = {
 export const container_orderlist = {
     backgroundColor: '#fff',
 };
+
+export const delivery_box = {
+    fontSize: 20,
+    marginBottom: 28,
+    borderWidth: 1,
+    padding: 10,
+    borderColor: "#ccc",
+    borderRadius: 3,
+}

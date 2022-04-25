@@ -1,5 +1,7 @@
 import config from "../config/config.json";
 import Order from "../interfaces/order";
+import Product from "../interfaces/order_item";
+
 
 
 const products = {
@@ -29,6 +31,23 @@ const products = {
                 method: 'PUT'
             });
         }
+    },
+    addStock: async function addStock(product: Partial<Product>) {
+        console.log(product)
+        var updateProduct = {
+            id: product.id,
+            name: product.name,
+            stock: product.stock,
+            api_key: config.api_key,
+        };
+
+        fetch(`${config.base_url}/products`, {
+            body: JSON.stringify(updateProduct),
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        });
     },
 }
 

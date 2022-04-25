@@ -5,6 +5,9 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 24,
         color: '#333',
-
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'ccc',
+        borderRadius: 0.2,
     }
 });
