@@ -72,6 +72,7 @@ export default function DeliveryForm({ route, navigation, setProductsHome }) {
     const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
 
     async function addDelivery() {
+
         await deliveryModel.addDelivery(delivery);
 
         const updatedProduct = {

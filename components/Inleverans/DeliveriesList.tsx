@@ -21,16 +21,21 @@ export default function DeliveriesList({ navigation, route }) {
         reloadDeliveries();
     }, []);
 
-    const listOfDeliveries = allDeliveries
-        .map((delivery, index) => {
-            return <View key={index} style={Base.delivery_box}>
-                <Text>Leverans-ID: {delivery.id}</Text>
-                <Text>Produkt: {delivery.product_id} - {delivery.product_name}</Text>
-                <Text>Antal: {delivery.amount}</Text>
-                <Text>Datum: {delivery.delivery_date}</Text>
-                <Text>Kommentar: {delivery.comment}</Text>
-            </View>
-        })
+    var listOfDeliveries;
+
+    if (allDeliveries.length >= 1) {
+        listOfDeliveries = allDeliveries
+            .map((delivery, index) => {
+                return <View key={index} style={Base.delivery_box}>
+                    <Text>Leverans-ID: {delivery.id}</Text>
+                    <Text>Produkt: {delivery.product_id} - {delivery.product_name}</Text>
+                    <Text>Antal: {delivery.amount}</Text>
+                    <Text>Datum: {delivery.delivery_date}</Text>
+                    <Text>Kommentar: {delivery.comment}</Text>
+                </View>
+            })} else {
+        listOfDeliveries = <Text style={Typography.header3}>Det finns inga inleveranser.</Text>
+    }
 
     return (
         <ScrollView>
