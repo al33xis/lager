@@ -8,6 +8,16 @@ import Delivery from "../../interfaces/delivery";
 import productModel from "../../models/products";
 import deliveryModel from "../../models/delivery";
 
+function zeroPad(number:number): string {
+    if (number < 10) {
+        return "0"+number;
+    }
+    return ""+number;
+}
+
+function formatDate(date: Date): string {
+    return `${date.getFullYear()}-${zeroPad(date.getMonth()+1)}-${zeroPad(date.getDate())}`;
+}
 
 function ProductDropDown(props) {
     const [products, setProducts] = useState<Product[]>([]);
@@ -54,7 +64,7 @@ function DateDropDown(props) {
 
                         props.setDelivery({
                             ...props.delivery,
-                            delivery_date: date.toLocaleDateString('se-SV'),
+                            delivery_date: formatDate(date),
                         });
 
                         setShow(false);
