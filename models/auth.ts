@@ -6,7 +6,7 @@ const auth = {
     loggedIn: async function loggedIn() {
         const token: any = await storage.readToken();
         const twentyFourHours = 1000*60*60*24;
-        const notExpired = (new Date().getTime() - token.date) < twentyFourHours;
+        const notExpired = (new Date().getTime() - token?.date) < twentyFourHours;
 
         return token && notExpired;
     },

@@ -15,5 +15,3 @@ export default function Invoices(props) {
         </Stack.Navigator>
     );
 };
-
-// skicka med props i InvoiceForm eller???

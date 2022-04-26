@@ -36,7 +36,7 @@ export default function AuthFields({auth, setAuth, title, submit, navigation}) {
                 submit();
             }}
             />
-
+        <Text></Text>
         {title == "Logga in" &&
             <Button 
                 title="Registrera"

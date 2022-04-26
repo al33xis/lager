@@ -32,8 +32,8 @@ export default function InvoicesList({ route, navigation, setIsLoggedIn}) {
         return (
             <DataTable.Row key={index}>
                 <DataTable.Cell>{invoice.name}</DataTable.Cell>
-                <DataTable.Cell>{invoice.total_price}</DataTable.Cell>
-                <DataTable.Cell>{invoice.due_date}</DataTable.Cell>
+                <DataTable.Cell numeric>{invoice.total_price}</DataTable.Cell>
+                <DataTable.Cell numeric>{invoice.due_date}</DataTable.Cell>
             </DataTable.Row>
         );
     });
@@ -41,13 +41,13 @@ export default function InvoicesList({ route, navigation, setIsLoggedIn}) {
     // datatable mellan fakturor och skapa faktura
     return (
         <ScrollView>
-            <Text>Fakturor</Text>
+            <Text style={Typography.header2}>Fakturor</Text>
 
             <DataTable>
                 <DataTable.Header>
                     <DataTable.Title>Namn</DataTable.Title>
-                    <DataTable.Title>Pris</DataTable.Title>
-                    <DataTable.Title>Fakturadatum</DataTable.Title>
+                    <DataTable.Title numeric>Pris</DataTable.Title>
+                    <DataTable.Title numeric>Fakturadatum</DataTable.Title>
                 </DataTable.Header>
                 {invoicesRows}
             </DataTable>
@@ -58,7 +58,7 @@ export default function InvoicesList({ route, navigation, setIsLoggedIn}) {
                 navigation.navigate("Form");
             }}
             />
-
+            <Text></Text>
             <Button 
             title="Logga ut"
             onPress={async () => {

@@ -20,6 +20,8 @@ const routeIcons = {
     "Lager": "home",
     "Plock": "list",
     "Inleverans": "airplane",
+    "Logga in": "lock-closed",
+    "Faktura": "cash",
 };
 
 
