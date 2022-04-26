@@ -10,8 +10,6 @@ const delivery = {
         return result.data;
     },
     addDelivery: async function addDelivery(delivery: Partial<Delivery>) {
-        console.log(delivery);
-
         var updateDelivery = {
             product_id: delivery.product_id,
             amount: delivery.amount,

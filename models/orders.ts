@@ -10,9 +10,6 @@ const orders = {
         return result.data;
     },
     pickOrder: async function pickOrder(order: Partial<Order>) {
-        // console.log(order.id);
-        // console.log(order.name);
-
         var updateOrder = {
             id: order.id,
             name: order.name,
@@ -29,6 +26,28 @@ const orders = {
         });
 
         products.updateStock(order.order_items);
+    },
+    getOrder: async function getOrder(order: Partial<Order>) {
+        const response = await fetch(`${config.base_url}/orders/${order}?api_key=${config.api_key}`);
+        const result = await response.json();
+
+        return result.data;
+    },
+    updateOrder: async function updateOrder(order: Partial<Order>) {
+        var updateOrder = {
+            id: order.id,
+            name: order.name,
+            status_id: order.status_id,
+            api_key: config.api_key,
+        };
+
+        fetch(`${config.base_url}/orders`, {
+            body: JSON.stringify(updateOrder),
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        });
     }
 };
 

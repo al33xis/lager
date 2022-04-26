@@ -4,11 +4,11 @@ import storage from "./storage";
 
 const auth = {
     loggedIn: async function loggedIn() {
-        const tokenAndDate = storage.readToken();
+        const token: any = await storage.readToken();
         const twentyFourHours = 1000*60*60*24;
-        const notExpired = (new Date().getTime() - tokenAndDate.date) < twentyFourHours;
+        const notExpired = (new Date().getTime() - token.date) < twentyFourHours;
 
-        return tokenAndDate.token && notExpired;
+        return token && notExpired;
     },
     register: async function register(email: string, password: string) {
         const data = {
@@ -48,7 +48,9 @@ const auth = {
         await storage.storeToken(result.data.token); 
 
         return result.data.message;
-
+    },
+    logout: async function logout() {
+        await storage.deleteToken();
     }
 };
 

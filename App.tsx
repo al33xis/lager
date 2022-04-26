@@ -8,6 +8,7 @@ import { ScrollView } from 'react-native';
 import Home from "./components/lager/Home";
 import Pick from "./components/plock/Pick";
 import Deliveries from "./components/inleverans/Deliveries";
+import Invoices from './components/invoices/Invoices';
 
 import productModel from "./models/products";
 import { Base, Typography } from "./styles/index";
@@ -53,7 +54,9 @@ export default function App() {
                             {() => <Deliveries products={products} setProducts={setProducts}/>}
                         </Tab.Screen>
                         {isLoggedIn ?
-                            <Tab.Screen name="Faktura" component={Pick} /> : // Invoices
+                            <Tab.Screen name="Faktura">
+                                {() => <Invoices setIsLoggedIn={setIsLoggedIn} />}
+                            </Tab.Screen> :
                             <Tab.Screen name="Logga in">
                                 {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
                             </Tab.Screen>
