@@ -5,11 +5,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ScrollView } from 'react-native';
+import FlashMessage from "react-native-flash-message";
 import Home from "./components/lager/Home";
 import Pick from "./components/plock/Pick";
 import Deliveries from "./components/inleverans/Deliveries";
 import Invoices from './components/invoices/Invoices';
 import Ship from './components/ship/Ship';
+
 
 import productModel from "./models/products";
 import { Base, Typography } from "./styles/index";
@@ -71,6 +73,7 @@ export default function App() {
                     </Tab.Navigator>
             </NavigationContainer>
             <StatusBar style='auto' />
+            <FlashMessage position="top" />
         </SafeAreaView>
   );
 }
