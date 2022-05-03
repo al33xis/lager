@@ -34,3 +34,31 @@ export const list_item = {
     color: '#333',
     marginBottom: 4,
 };
+
+export const map_header1 = {
+    fontSize: 36,
+    marginBottom: 8,
+    color: '#333',
+    textAlign: 'center',
+};
+
+export const map_header2 = {
+    fontSize: 24,
+    marginBottom: 8,
+    color: '#333',
+    textAlign: 'center',
+};
+
+export const map_header3 = {
+    fontSize: 18,
+    marginBottom: 28,
+    color: '#333',
+    textAlign: 'center',
+};
+
+export const map_normal = {
+    fontSize: 20,
+    marginTop: 10,
+    marginBottom: 12,
+    color: '#333',
+};
