@@ -9,6 +9,7 @@ import Home from "./components/lager/Home";
 import Pick from "./components/plock/Pick";
 import Deliveries from "./components/inleverans/Deliveries";
 import Invoices from './components/invoices/Invoices';
+import Ship from './components/ship/Ship';
 
 import productModel from "./models/products";
 import { Base, Typography } from "./styles/index";
@@ -22,6 +23,7 @@ const routeIcons = {
     "Inleverans": "airplane",
     "Logga in": "lock-closed",
     "Faktura": "cash",
+    "Skicka": "mail",
 };
 
 
@@ -54,6 +56,9 @@ export default function App() {
                         </Tab.Screen>
                         <Tab.Screen name="Inleverans">
                             {() => <Deliveries products={products} setProducts={setProducts}/>}
+                        </Tab.Screen>
+                        <Tab.Screen name="Skicka">
+                            {() => <Ship products={products} setProducts={setProducts} />}
                         </Tab.Screen>
                         {isLoggedIn ?
                             <Tab.Screen name="Faktura">
