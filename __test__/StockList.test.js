@@ -1,3 +1,5 @@
+/* global test, expect */
+
 // I Lagerförteckningen ska det finnas en lista med produkter. Listan ska innehålla produktens namn och lagersaldo.
 
 import { render } from "@testing-library/react-native";

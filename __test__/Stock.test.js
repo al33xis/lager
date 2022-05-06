@@ -1,3 +1,5 @@
+/* global test, expect */
+
 import { render } from "@testing-library/react-native";
 import Stock from "../components/lager/Stock";
 
