@@ -3,10 +3,46 @@ import { Platform, ScrollView, View, Text, TextInput, Button } from "react-nativ
 import { Base, Typography, Forms } from "../../styles/index";
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { showMessage } from "react-native-flash-message";
 
 import Delivery from "../../interfaces/delivery";
 import productModel from "../../models/products";
 import deliveryModel from "../../models/delivery";
+
+function validateAmount(content: any) {
+
+    console.log(content);
+
+    // if (!isNaN(content.amount)) {
+    //     console.log("rätt ifylld")
+    // } else {
+    //     console.log("inget värde")
+    // }
+
+    // if (content.match(pattern)) {
+    //     showMessage({
+    //         message: "Fel format",
+    //         description: "Du får bara skriva in siffror",
+    //         type: "warning",
+    //         floating: true
+    //     });
+    // } else {
+    //     showMessage({
+    //         message: "Inmatning godkänd!",
+    //         type: "success",
+    //         floating: true
+    //     })
+    // }
+}
+
+// Raderar allt som inte är ett nummer
+function removeNan(delivery: any) {
+    if (delivery?.amount?.toString() === "NaN") {
+        return "";
+    } else {
+        return delivery?.amount?.toString();
+    }
+}
 
 function zeroPad(number:number): string {
     if (number < 10) {
@@ -16,7 +52,7 @@ function zeroPad(number:number): string {
 }
 
 function formatDate(date: Date): string {
-    return `${date.getFullYear()}-${zeroPad(date.getMonth()+1)}-${zeroPad(date.getDate())}`;
+    return `${date?.getFullYear()}-${zeroPad(date?.getMonth()+1)}-${zeroPad(date?.getDate())}`;
 }
 
 function ProductDropDown(props) {
@@ -69,7 +105,7 @@ function DateDropDown(props) {
 
                         setShow(false);
                     }}
-                    value={dropDownDate}
+                    value={dropDownDate || new Date()}
                 />
             )}
         </View>
@@ -114,8 +150,10 @@ export default function DeliveryForm({ route, navigation, setProductsHome }) {
                 keyboardType="numeric"
                 onChangeText={(content: string) => {
                     setDelivery({ ...delivery, amount: parseInt(content) })
+                    // validateAmount(delivery)
                 }}
-                value={delivery?.amount?.toString()}
+                // value={delivery?.amount?.toString()}
+                value={removeNan(delivery)}
             />
 
             <Text style={{...Typography.list_head}}>Datum</Text>
@@ -136,7 +174,35 @@ export default function DeliveryForm({ route, navigation, setProductsHome }) {
             <Button
                 title="Gör inleverans"
                 onPress={() => {
-                    addDelivery();
+                    let message: string;
+                    let description: string;
+                    let type: any;
+
+                    if (!delivery?.product_id) {
+                        message = "Ingen produkt vald";
+                        description = "Du måste välja en produkt."
+                        type = "warning"
+                    } else if (!delivery?.amount) {
+                        message = "Antal ej valt"
+                        description = "Du måste välja antal produkter att inleverera."
+                        type = "warning"
+                    } else if (!delivery?.delivery_date) {
+                        message = "Datum ej valt"
+                        description = "Du måste välja ett datum för inleveransen"
+                        type = "warning"
+                    } else {
+                        message = "Lyckad inleverans!"
+                        description = "Leveransen har registrerats."
+                        type = "success"
+                        addDelivery();
+                    }
+
+                    showMessage({
+                        message: message,
+                        description: description,
+                        type: type,
+                        floating: true
+                    })
                 }}
             />
         </ScrollView>
