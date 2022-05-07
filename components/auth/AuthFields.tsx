@@ -73,6 +73,7 @@ export default function AuthFields({auth, setAuth, title, submit, navigation}) {
             autoCapitalize="none"
             autoCorrect={false}
             style={Forms.input}
+            testID="email-field"
             />
 
         <Text style={Typography.list_head}>Lösenord</Text>
@@ -86,6 +87,7 @@ export default function AuthFields({auth, setAuth, title, submit, navigation}) {
             autoCapitalize="none"
             autoCorrect={false}
             style={Forms.input}
+            testID="password-field"
             />
 
         <Button 
@@ -93,6 +95,7 @@ export default function AuthFields({auth, setAuth, title, submit, navigation}) {
             onPress={() => {
                 submit();
             }}
+            accessibilityLabel={`${title} genom att trycka`}
             />
         <Text></Text>
         {title == "Logga in" &&

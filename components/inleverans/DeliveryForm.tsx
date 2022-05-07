@@ -9,32 +9,6 @@ import Delivery from "../../interfaces/delivery";
 import productModel from "../../models/products";
 import deliveryModel from "../../models/delivery";
 
-function validateAmount(content: any) {
-
-    console.log(content);
-
-    // if (!isNaN(content.amount)) {
-    //     console.log("rätt ifylld")
-    // } else {
-    //     console.log("inget värde")
-    // }
-
-    // if (content.match(pattern)) {
-    //     showMessage({
-    //         message: "Fel format",
-    //         description: "Du får bara skriva in siffror",
-    //         type: "warning",
-    //         floating: true
-    //     });
-    // } else {
-    //     showMessage({
-    //         message: "Inmatning godkänd!",
-    //         type: "success",
-    //         floating: true
-    //     })
-    // }
-}
-
 // Raderar allt som inte är ett nummer
 function removeNan(delivery: any) {
     if (delivery?.amount?.toString() === "NaN") {
@@ -150,10 +124,10 @@ export default function DeliveryForm({ route, navigation, setProductsHome }) {
                 keyboardType="numeric"
                 onChangeText={(content: string) => {
                     setDelivery({ ...delivery, amount: parseInt(content) })
-                    // validateAmount(delivery)
                 }}
                 // value={delivery?.amount?.toString()}
                 value={removeNan(delivery)}
+                testID="amount-field"
             />
 
             <Text style={{...Typography.list_head}}>Datum</Text>
@@ -169,10 +143,12 @@ export default function DeliveryForm({ route, navigation, setProductsHome }) {
                     setDelivery({...delivery, comment: content})
                 }}
                 value={delivery?.comment}
+                testID="comment-field"
             />
 
             <Button
                 title="Gör inleverans"
+                accessibilityLabel="Tryck för att registrera inleveransen"
                 onPress={() => {
                     let message: string;
                     let description: string;

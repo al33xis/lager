@@ -46,6 +46,7 @@ export default function DeliveriesList({ navigation, route }) {
                 onPress={() => {
                     navigation.navigate('Form');
                 }}
+                accessibilityLabel="Tryck för att skapa en inleverans"
             />
         </ScrollView>
     )
