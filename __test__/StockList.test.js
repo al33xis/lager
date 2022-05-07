@@ -24,5 +24,10 @@ test('List should contain three items', async () => {
     expect(balsam).toBeDefined();
     expect(soap).toBeDefined();
 
+    expect(products[0].stock).toEqual(2);
+    expect(products[1].stock).toEqual(3);
+    expect(products[2].stock).toEqual(15);
+
+
     // debug("StockList component");
 });
